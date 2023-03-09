@@ -79,7 +79,7 @@ def layout_3(num_box, color):
 
 
 
-
+One Quick piece of advice, don't be limited to 1 single resource, that is really not good,so don't be a box. 
 
 
 
