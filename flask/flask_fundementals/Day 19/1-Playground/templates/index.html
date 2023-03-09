@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layouts</title>
+    <style>
+      .layout_1,
+      .layout_2,
+      .layout_3 {
+        width: 800px;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .blue-box {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 20%;
+        height: 200px;
+        background-color: #9fc5f8;
+        border: 3px solid black;
+        margin-bottom: 20px;
+      }
+      h1 {
+        text-align: center;
+        font-size: 50px;
+      }
+      .boxes {
+        display: flex;
+        justify-content: space-between;
+
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    {% if layout == 'layout_1' %}
+    <div class="layout_1">
+      <h1>Welcome!</h1>
+      <div class="boxes">
+        <div class="blue-box"></div>
+        <div class="blue-box"></div>
+        <div class="blue-box"></div>
+      </div>
+    </div>
+    {% elif layout == 'layout_2' %}
+    <div class="layout_2">
+      <h1>Welcome</h1>
+      <div class="boxes">
+        {% for i in range(num_box) %}
+        <div class="blue-box"></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% elif layout == 'layout_3' %}
+    <div class="layout_3">
+      <h1>Welcome</h1>
+      <div class="boxes">
+        {% for i in range(num_box) %}
+        <div class="blue-box" style="background-color: {{ color }};"></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </body>
+</html>

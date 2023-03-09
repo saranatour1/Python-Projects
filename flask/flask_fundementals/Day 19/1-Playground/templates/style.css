@@ -1,0 +1,21 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+.layout_1{
+  width:800px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+
+}
+.blue-box{
+  flex: 0.3;
+  height: 400px;
+  color: lightskyblue;
+}
+h1{
+  text-align: center;
+  font-size: 500;
+}
