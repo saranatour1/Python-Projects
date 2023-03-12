@@ -13,9 +13,7 @@
     />
   </head>
   <body>
-    <table
-      class="table container container-sm container-md mx-auto my-3 table-bordered table-sm"
-    >
+    <table class="table container container-sm container-md mx-auto my-3 table-bordered table-sm">
       <thead>
         <tr>
           <th class="th-sm" scope="col">First name</th>
@@ -25,13 +23,14 @@
       </thead>
       <tbody>
         {% for elem in users %}
-        <tr>
-          <td>{{elem['first_name']}}</td>
-          <td>{{elem['last_name']}}</td>
-          <td>{{elem['first_name'] +" "+ elem['last_name']}}</td>
-        </tr>
+          <tr>
+            <td>{{elem.first_name}}</td>
+            <td>{{elem.last_name}}</td>
+            <td>{{elem.first_name}} {{elem.last_name}}</td>
+          </tr>
+        {% endfor %}
       </tbody>
-      {%endfor%}
     </table>
+    
   </body>
 </html>
