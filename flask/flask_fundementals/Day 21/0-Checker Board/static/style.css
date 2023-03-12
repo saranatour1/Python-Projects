@@ -1,0 +1,17 @@
+*{
+  padding: 0;
+  margin: 0;
+  border-spacing: 0;
+}
+
+td{
+  width: 50px;
+  height: 50px;
+  
+}
+.white {
+  background-color: #ff0000;
+}
+.black {
+  background-color: #000;
+}
