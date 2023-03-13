@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forms in Flask</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <form action="/result" method="post">
+        <div class="persons-name">
+          <label for="name">Your name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Your name here"
+          />
+        </div>
+        <div class="location">
+          <label for="location">Dojo Location</label>
+          <select name="location" id="location">
+            <option value="palestine">Palestine</option>
+            <option value="mexico">Mexico</option>
+            <option value="USA">Usa</option>
+          </select>
+        </div>
+        <div class="Language">
+          <label for="lang">Your Favorite Programming language</label>
+          <select name="language" id="language">
+            <option value="python">python</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="java">Java</option>
+          </select>
+        </div>
+        <div class="survey">
+          <p>Tell how much You love this Survey!</p>
+          <input type="radio" id="love" name="options" value="love" />
+          <label for="love">3</label><br />
+          <input
+            type="radio"
+            id="inbetween"
+            name="options"
+            value="in between"
+          />
+          <label for="css">2</label><br />
+          <input
+            type="radio"
+            id="dissatisfaction"
+            name="options"
+            value="dissatisfied"
+          />
+          <label for="dissatisfaction">1</label>
+        </div>
+        <div class="comments">
+          <label for="comments">Comments (optional)</label>
+          <textarea
+            name="comments"
+            id="comments"
+            placeholder="Your comments here"
+          ></textarea>
+        </div>
+        <div class="terms-and-conditions">
+          <input type="checkbox" id="accept" name="terms" value="accept" />
+          <label for="accept"> I accept the terms and </label>
+        </div>
+
+        <input type="submit" value="Submit!" />
+      </form>
+    </div>
+  </body>
+</html>
