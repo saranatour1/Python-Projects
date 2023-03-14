@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&family=Inter:wght@400;700&family=Kumbh+Sans:wght@400;700&family=Outfit:wght@300;400;600&family=Roboto&family=Source+Serif+Pro:wght@300;400;600;700&display=swap");
+* {
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: "Inria Serif", serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
+  font-family: "Outfit", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-family: "Source Serif Pro", serif;
+  box-shadow: 3px 3px 4px 4px #cccc;
+}
+
+select,
+option,
+button,
+input[type="submit"],
+input:placeholder-shown,
+textarea:placeholder-shown {
+  font-family: "Inria Serif", serif;
+  font-family: "Inter", sans-serif;
+  font-family: "Kumbh Sans", sans-serif;
+  font-family: "Outfit", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-family: "Source Serif Pro", serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.persons-name,
+.location,
+.Language,
+.comments {
+  margin: 10px 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+select,
+textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  margin-top: 5px;
+}
+select {
+  width: 210px;
+}
+
+input[type="submit"],
+a button {
+  padding: 10px 20px;
+  background-color: #76a5af;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover,
+a button:hover {
+  filter: brightness(110%);
+}
+.persons-name,
+.location,
+.Language,
+.survey {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.terms-and-conditions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.info {
+  margin-bottom: 20px;
+}
+
+.info p {
+  font-size: 18px;
+  line-height: 24px;
+  margin: 10px 0;
+}
+
+.info span {
+  font-weight: bold;
+}
+textarea {
+  min-width: 60px;
+  max-width: 100%;
+  min-height: 80px;
+  height: 100%;
+  width: 96%;
+}
