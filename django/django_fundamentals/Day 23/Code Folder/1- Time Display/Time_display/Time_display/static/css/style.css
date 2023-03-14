@@ -1,0 +1,25 @@
+*{
+  padding: 0;
+  margin:0;
+  font-family: 'serif',Times , serif;
+}
+
+.box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border: 1px solid #ccc;
+  width: 40rem;
+  height: 15rem;
+  box-shadow: 1px 1px 1px 1px #ccc;
+}
+h1{
+  margin-bottom: 50px;
+  margin-top: 5px;
+}
+p{
+  margin-bottom:20px;
+  font-size: 30px;
+}
