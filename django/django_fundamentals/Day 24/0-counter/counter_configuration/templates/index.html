@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Django Counter</title>
+  {% load static %}	
+  <link rel="stylesheet" href="{% static 'style.css' %}">  
+</head>
+<body>
+  <hgroup>
+    <h1>
+        Counter
+    </h1>
+    <p>You have visited this page {{counter}}</p>
+</hgroup>
+  <div class="reset">
+    <button><a href="/destroy_session">Reset</a></button>
+    <button><a href="/increment">Increment +2</a></button>
+  </div>
+</body>
+</html>

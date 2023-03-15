@@ -1,0 +1,38 @@
+*{
+  padding:0;
+  margin: 0;
+}
+
+hgroup{
+ width: 40rem;
+ margin: 4rem auto;
+  text-align: center;
+ 
+}
+h1{
+  margin-bottom: 5px;
+}
+p{
+  text-decoration:wavy;
+  color: #111;
+}
+.reset{
+  width: 40rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+button{
+  background-color: rgb(97, 191, 97);
+  width: 80px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+ margin-right: 5px;
+}
