@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Great number game </title>
+  {% load static %}		
+  <link rel="stylesheet" href="{% static 'style.css' %}">   
+</head>
+<body>
+  <div class="mid-text">
+    <h1>Welcome to the great number game</h1>
+    <p>I am thinking of a number between 1 - 100</p>
+    <p>Take a guess!</p>
+</div>
+{% if message and not win %}
+    <p class="message" >{{ message }}</p>
+    {%elif win%}
+    <p id="win">{{ message }}</p>
+{% endif %}
+\
+
+
+<form action="/" method="post">
+    {% csrf_token %}
+    <label for="number">Pick a number (between 1 and 100):</label><br>
+    <input type="number" id="number" name="number" min="1" max="100"><br>
+    <input type="submit" value="submit">
+</form>
+
+
+
+</body>
+</html>
