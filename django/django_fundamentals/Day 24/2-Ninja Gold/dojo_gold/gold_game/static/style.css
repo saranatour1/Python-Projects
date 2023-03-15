@@ -1,0 +1,106 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border-spacing: 0;
+}
+.container {
+  width: 90%;
+  margin: 2rem auto;
+}
+.Gold-input-from-python {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+.gold {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.gold-container {
+  width: 100px;
+  height: inherit;
+  border: 1px solid #000;
+  margin-left: 4px;
+  border-radius: 8px;
+}
+.gold-container span {
+  padding-left: 2px;
+  font-size: 16px;
+}
+
+.forms {
+  display: flex;
+  margin: 2.5rem auto;
+  align-items: center;
+  justify-content: space-between;
+}
+.form {
+  flex: 0.23;
+  text-align: center;
+  height: 200px;
+  border: 1px solid #000000f4;
+  align-self: auto;
+  border-radius: 18px;
+  line-height: 2.5;
+}
+/* .form h1{
+  margin:1rem auto;
+  height: 20px;
+} */
+.form p {
+  height: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+input[type="submit"] {
+  display: block;
+  margin: 2rem auto;
+  width: 100px;
+  height: 30px;
+  border-radius: 7px;
+  box-shadow: 3px 1px 1px 2px #ccc;
+  border: none;
+  color: #000;
+  background-color: #fcfcfc;
+  font-weight: 700;
+  cursor: pointer;
+}
+.activites {
+  width: 100%;
+  margin: 0 auto;
+}
+h3 {
+  margin-bottom: 20px;
+}
+.big-box {
+  border: 1px solid #000;
+  border-radius: 18px;
+  height: 20rem;
+}
+.big-box p {
+  text-align: left;
+  font-size: 16px;
+  color: green;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.scroll-down {
+  overflow-y: scroll !important;
+  max-height: 20rem !important;
+}
+.scroll-down::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa; /* or add it to the track */
+}
+.green{
+  color: green ;
+}
+.red{
+  color: red;
+}

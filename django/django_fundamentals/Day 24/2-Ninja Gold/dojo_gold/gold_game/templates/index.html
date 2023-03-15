@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ninja Gold Game</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="Gold-input-from-python">
+        <label class="gold" for="gold">Your Gold</label>
+        <div class="gold-container"><span>{{count}}</span></div>
+      </div>
+      <div class="forms">
+        <div class="form">
+          <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="farm" />
+            <h1>Farm</h1>
+            <p>Earns (10-20) Golds</p>
+            <input type="submit" value="Find Gold!" />
+          </form>
+        </div>
+        <div class="form">
+          <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="cave" />
+            <h1>Cave</h1>
+            <p>Earns (10-20) Golds</p>
+            <input type="submit" value="Find Gold!" />
+          </form>
+        </div>
+        <div class="form">
+          <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="house" />
+            <h1>House</h1>
+            <p>Earns (10-20) Golds</p>
+            <input type="submit" value="Find Gold!" />
+          </form>
+        </div>
+        <div class="form">
+          <form method="post" action="/process_money">
+            {% csrf_token %}
+            <input type="hidden" name="which_form" value="quest" />
+            <h1>Quest</h1>
+            <p>Earns/takes (0-50) Golds</p>
+            <input type="submit" value="Find Gold!" />
+          </form>
+        </div>
+      </div>
+      <div class="activites">
+        <h3>Activites:</h3>
+        <div class="big-box">
+          <div class="scroll-down"> 
+          {% if activities%}
+          {% for activity in activities %}
+          <p >{{ activity }}</p>
+          {% endfor %}
+          {% else %}
+          <p>No activities to show.</p>
+        {% endif %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
