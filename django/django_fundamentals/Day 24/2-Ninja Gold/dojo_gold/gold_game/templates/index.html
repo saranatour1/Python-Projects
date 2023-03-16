@@ -55,17 +55,16 @@
       <div class="activites">
         <h3>Activites:</h3>
         <div class="big-box">
-          <div class="scroll-down"> 
-          {% if activities%}
-          {% for activity in activities %}
-          <p >{{ activity }}</p>
-          {% endfor %}
-          {% else %}
-          <p>No activities to show.</p>
-        {% endif %}
-        </div>
+          <div class="scroll-down">
+            {% if activities%} {% for activity in activities %}
+            <p>{{ activity }}</p>
+            {% endfor %} {% else %}
+            <p>No activities to show.</p>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
+
   </body>
 </html>

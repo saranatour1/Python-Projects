@@ -90,17 +90,20 @@ h3 {
 }
 
 .scroll-down {
-  overflow-y: scroll !important;
+  /* overflow-y: scroll !important; */
+  overflow: auto;
   max-height: 20rem !important;
+  display: flex;
+  flex-direction: column-reverse;
 }
 .scroll-down::-webkit-scrollbar {
   width: 5px;
   height: 8px;
   background-color: #aaa; /* or add it to the track */
 }
-.green{
-  color: green ;
+.green {
+  color: green;
 }
-.red{
+.red {
   color: red;
 }

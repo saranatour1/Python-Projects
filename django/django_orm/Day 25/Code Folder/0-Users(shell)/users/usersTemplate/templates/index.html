@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users with templates</title>
+    {% load staticfiles %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+  </head>
+  <body>
+    <div class="container container-sm container-md mx-auto mt-5">
+      <h1 class="text-center display-4 my-2">All the users</h1>
+      <table
+        class="table table-striped table-hover my-3 container container-sm container-md"
+      >
+        <tr scope="row">
+          <td class="fw-normal" scope="col">id</td>
+          <td class="fw-normal" scope="col">Name</td>
+          <td class="fw-normal" scope="col">Email</td>
+          <td>Age</td>
+        </tr>
+        <div class=" class="scroll-down">
+        {%for user in all_the_users %}
+        <tr scope="row">
+          <td class="fw-normal">{{user.id}}</td>
+          <td class="fw-normal">{{user.first_name}} {{user.last_name}}</td>
+          <td class="fw-normal">{{user.email_address}}</td>
+          <td class="fw-normal">{{user.age}}</td>
+        </tr>
+        {%endfor%}
+      </div>
+      </table>
+      <hr class="container container-md container-sm text-center" />
+      <form action="/" method="post" class="container px-5">
+        {% csrf_token %} 
+        <h1 class="text-center display-6 my-2">Add A new User</h1>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group my-2">
+              <label for="first_name">First name:</label>
+              <input
+                type="text"
+                name="first_name"
+                id="first_name"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group my-2">
+              <label for="last_name">Last name:</label>
+              <input
+                type="text"
+                name="last_name"
+                id="last_name"
+                class="form-control"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group my-2">
+              <label for="email">Email:</label>
+              <input type="text" name="email" id="email" class="form-control" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group my-2">
+              <label for="age">Age:</label>
+              <input type="text" name="age" id="age" class="form-control" />
+            </div>
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="col-md-12">
+            <div class="form-group text-center my-2">
+              <button type="submit" class="btn btn-light btn-md">Add</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
