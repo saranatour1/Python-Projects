@@ -94,7 +94,8 @@ h3 {
   overflow: auto;
   max-height: 20rem !important;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  padding: 20px;
 }
 .scroll-down::-webkit-scrollbar {
   width: 5px;
@@ -102,8 +103,8 @@ h3 {
   background-color: #aaa; /* or add it to the track */
 }
 .green {
-  color: green;
+  color: green !important;
 }
 .red {
-  color: red;
+  color: red !important;
 }

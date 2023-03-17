@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dojo_gold',
+   
     'gold_game',
     'django.contrib.admin',
     'django.contrib.auth',

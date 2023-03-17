@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ninja Gold Game</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
   </head>
   <body>
     <div class="container">
@@ -56,15 +56,13 @@
         <h3>Activites:</h3>
         <div class="big-box">
           <div class="scroll-down">
-            {% if activities%} {% for activity in activities %}
-            <p>{{ activity }}</p>
-            {% endfor %} {% else %}
+            {% if activities%} {% for activity in activities %} {{ activity|safe
+            }} {% endfor %} {% else %}
             <p>No activities to show.</p>
             {% endif %}
           </div>
         </div>
       </div>
     </div>
-
   </body>
 </html>
