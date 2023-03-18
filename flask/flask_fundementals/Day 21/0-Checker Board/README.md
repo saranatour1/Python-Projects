@@ -111,14 +111,14 @@ then I started manipulating the look of the output in a for loop, where each row
 note that, I reffered the col and row variables in the flask app, to reduce one step, and to make sure that the two are connected. 
 in the flask app: 
 
-```python3
+```python
 @app.route("/")
 def hello_world(row=8 , col=8):
   return render_template("index.html", row=row, col=col)
 ```
 and the output stays the same no matter what!
 then I was wondering if I could refer to the routes as one route, as if I could edit one of the routes and it wouldn;t effect the other, an that appearantly was the best idea I had, In the second part I tried that: 
-```python3
+```python
 @app.route("/")
 @app.route("/<int:small>")
 def hello_world(row=8 , col=8,small=8):
@@ -127,7 +127,7 @@ def hello_world(row=8 , col=8,small=8):
 ```
 So this makes sure that row stays at 8 when requested, and it wouldn't effect the row anywhere else, it would keep the column at default. 
 here is a screenshot:  **I know I messed up the colors**
-```python3
+```python
 
 @app.route("/")
 @app.route("/<int:small>")
@@ -140,7 +140,7 @@ def hello_world(row=8 , col=8,small=8):
 ![image](https://user-images.githubusercontent.com/77834808/224545875-7d7d1a3f-d0ae-4503-965b-b2a088262cc0.png)
 
 next is super easy to achieve, since I deducted a step above, everything will be normal:
-```python3
+```python
 
 @app.route("/")
 @app.route("/<int:small>")
@@ -171,7 +171,7 @@ this is what I did in the html to fixate the colors:
 
 ```
 and here is the edited python code : 
-```python3
+```python
 @app.route("/")
 @app.route("/<int:small>")
 @app.route("/<int:row>/<int:col>")
@@ -181,7 +181,7 @@ def hello_world(row=8 , col=8,small=8,color1="#000" , color2="#ff0000"):
   return render_template("index.html", row=row, col=col, small=small,color1=color1,color2=color2)
 ```
 I would make another modification to the pyhton code: 
-```python3
+```python
 @app.route("/")
 @app.route("/<color1>/<color2>")
 @app.route("/<int:small>")
