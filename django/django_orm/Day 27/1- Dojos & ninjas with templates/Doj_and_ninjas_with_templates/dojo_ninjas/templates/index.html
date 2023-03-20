@@ -150,7 +150,7 @@
           {%for dojo in all_dojos%}
           <div class="row">
             <h5 class="mb-3 col-sm-10">
-            Ninjas with Mr/Mrs {{dojo.name}} | Number of ninjas:  {{dojo.ninjas.all.count}}</h5>
+            Ninjas with Mr/Mrs {{dojo.name}} | <span class="text-muted lead">Number of ninjas:  {{dojo.ninjas.all.count}}</span> </h5>
             <form action="/delete_dojo" method="post" class="col-sm-2" >
               {% csrf_token %} 
               <input type="hidden" name="delete_val" value="{{dojo.id}}" />
