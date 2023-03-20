@@ -1,0 +1,84 @@
+1-Create a .txt file where you'll save each of your queries from below
+
+2-Query: Create 3 new dojos
+
+	Dojos.objects.create(name="Amin",city="Ramallah",state="1")
+	Dojos.objects.create(name="Sa'd",city="Hebron",state="2")
+	Dojos.objects.create(name="Fatimah",city="Tulkarem",state="3")
+
+
+3-Query: Delete the 3 dojos you just created
+
+	Dojos.objects.all().delete()
+Output: 
+(3, {'dojo_ninjas.Ninjas': 0, 'dojo_ninjas.Dojos': 3})
+
+4-Query: Create 3 more dojos
+
+	Dojos.objects.create(name="Amin",city="Ramallah",state="1")
+	Dojos.objects.create(name="Sa'd",city="Hebron",state="2")
+	Dojos.objects.create(name="Fatimah",city="Tulkarem",state="3")
+
+	
+5- Query: Create 3 ninjas that belong to the first dojo
+
+>>> dojo = Dojos.objects.get(id=5)
+>>> ninja = Ninjas.objects.create(first_name="Sara", last_name="Natour", dojo=dojo)
+>>> ninja = Ninjas.objects.create(first_name="Shatha", last_name="Morales", dojo=dojo)
+>>> ninja = Ninjas.objects.create(first_name="Mohd", last_name="Shadid", dojo=dojo)
+
+
+6-Query: Create 3 ninjas that belong to the second dojo
+>>> dojo = Dojos.objects.get(id=4)
+>>> ninja = Ninjas.objects.create(first_name="Samir", last_name="bannoura", dojo=dojo)
+>>> ninja = Ninjas.objects.create(first_name="Tamir", last_name="Sabir", dojo=dojo)
+>>> ninja = Ninjas.objects.create(first_name="Daoud", last_name="melhem", dojo=dojo)
+
+
+7- Query: Create 3 ninjas that belong to the third dojo
+>>> dojo = Dojos.objects.get(id=6)
+>>> ninja = Ninjas.objects.create(first_name="Jane", last_name="Doe", dojo=dojo)
+>>> ninja = Ninjas.objects.create(first_name="Jake", last_name="doe", dojo=dojo)
+>>> ninja = Ninjas.objects.create(first_name="hemlet", last_name="dave", dojo=dojo)
+
+8-Query: Retrieve all the ninjas from the first dojo
+
+dojo = Dojos.objects.get(id=4)
+ninjas = dojo.ninjas.all()
+for ninja in ninjas:
+  print(ninja.first_name,ninja.last_name)
+
+9- Query: Retrieve all the ninjas from the last dojo
+dojo = Dojos.objects.last()
+ninjas = dojo.ninjas.all()
+for ninja in ninjas:
+  print(ninja.first_name,ninja.last_name)
+
+10- Query: Retrieve the last ninja's dojo
+
+ninja=Ninjas.objects.first()
+
+print(ninja.dojo.name)
+
+
+11-Add a new text field called "desc" to your Dojo class
+
+We created the desc column and added a default value in the Models like so: 
+
+class Dojos(models.Model):
+    name = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=2)
+    desc=models.TextField(default='old dojo')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+12-Create and run the migration files to update the table in your database. If needed, provide a default value of "old dojo"
+ 
+
+
+13- Query: Create a new dojo
+ 
+
+
+

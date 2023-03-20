@@ -1,0 +1,57 @@
+1. Activated the virtual enviroment where django is installed 
+2. django-admin startproject users
+3.We created The appplication, and did the required commands to start the app 
+4.in the models.py, we created a classs called User, that has the following code :
+from django.db import models
+    
+class User(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email_address=models.CharField(max_length=255)
+    age=models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+5. then , We migrated the new table using the command : 
+ python manage.py makemigrations
+after that the output is: 
+"- Create model User"
+
+6. We entered the shell using the command: 
+python manage.py shell
+7. To get the table we wanted we use the following command: 
+ from usersTemplate.models import User
+
+8. To create three new users, we did this command three times: 
+User.objects.create(first_name="baher", last_name="samir",email_address="bsamir@gmail.com", age="25")
+
+9. To retreive all the users, we used two methods: 
+User.objects.all().values() 
+and 
+//User.objects.all().__dict__
+
+10. to retrieve the first object: 
+User.objects.first()
+
+11. Query: Change the user with id=3 so their last name is Pancakes.
+ user_3= User.objects.get(id=3)
+ user_3.last_name="Pancakes"
+ user_3.save()
+
+12.Query: Delete the user with id=2 from the database
+
+User_2=User.objects.get(id=2)
+User_2.delete()
+Output:(1, {'usersTemplate.User': 1})
+
+13.Query: Get all the users, sorted by their first name
+ 
+User.objects.all().order_by("first_name") ()
+14.BONUS Query: Get all the users, sorted by their first name in descending order
+User.objects.all().order_by("-first_name") 
+
+
+
+
+
+
+
