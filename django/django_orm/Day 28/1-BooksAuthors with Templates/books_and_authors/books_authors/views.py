@@ -23,7 +23,6 @@ def showBooks(request,number):
       'book_to_grab':book_to_grab,
       'all_authors':Author.objects.all(),
   }
-  
   return render(request,"showbooks.html",context)
 
 def addRelatedAuthors(request):
