@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show authors template</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"
+  ></script>
+  </head>
+  <body>
+    <div class="container container-sm container-md mt-5">
+      <div class="row">
+        <hgroup>
+          <h3>{{author_to_grab.first_name}} {{author_to_grab.last_name}}</h3>
+          <p>ID: {{author_to_grab.id}}</p>
+        </hgroup>
+        <dl class="row">
+          <dt class="col-sm-2">Notes</dt>
+          <dd class="col-sm-9">
+            {{author_to_grab.notes}}
+          </dd>
+        </dl>
+      </div>
+      <div>
+        <ul class="list-unstyled">
+          <li>
+            Books:
+            <ul>
+              {%for book in author_to_grab.books.all%}
+                <li>{{book.title}}</li>
+              {%endfor%}
+            </ul>
+          </li>
+        </ul>
+        <div class="row">
+          <div class="col-6">
+            <form action="/addbooktoauthor" method="post">
+              {%csrf_token%}
+              <input type="hidden" name="author_id" value="{{author_to_grab.id}}">
+              <select class="form-select" aria-label="Default select example" name="book_id">
+                <option selected>-Select Book to add-</option>
+                {%for book in all_books%}
+                  {% if book not in author_to_grab.books.all %}
+                    <option value="{{book.id}}">{{book.title}}</option>
+                  {%endif%}
+                {%endfor%}
+              </select>
+            </div>
+            <div class="col-2">
+              <button type="submit" class="btn btn-light">Add</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+1- Create the Book class model
+
+2- Create the Author class model
+
+3- Create and run the migration files to create the tables in your database
+
+4- Create a .txt file where you'll save each of your queries from below
+
+5- Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+
+>>> from books_authors.models import*
+>>> Book.objects.create(title="C sharp", desc="old book")
+<Book: Book object (1)>
+>>> Book.objects.create(title="Java", desc="old book")
+<Book: Book object (2)>
+>>> Book.objects.create(title="Python", desc="old book")
+<Book: Book object (3)>
+>>> Book.objects.create(title="PHP", desc="old book")
+<Book: Book object (4)>
+>>> Book.objects.create(title="Ruby", desc="old book")
+<Book: Book object (5)>
+
+
+
+
+
+
+6- Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lau Tzu
+
+
+>>> Author.objects.create(first_name="Jane",last_name="Austen")
+<Author: Author object (1)>
+>>> Author.objects.create(first_name="Emily",last_name="Dickinson")
+<Author: Author object (2)>
+>>> Author.objects.create(first_name="Fyodor",last_name="Dostoevsky")
+<Author: Author object (3)>
+>>> Author.objects.create(first_name="William",last_name="Shakespeare")
+<Author: Author object (4)>
+>>> Author.objects.create(first_name="Lau",last_name="Tzu")
+<Author: Author object (5)>
+
+
+7- Add a new text field in the authors table called 'notes'.
+
+in the authtors class , we created a 'notes' filed, we made the neccessary migrations and it all worked.
+
+Create and run the migration files to update the table in your database.
+
+8- Query: Change the name of the C Sharp book to C#
+
+>>> book_to_update = Book.objects.get(id=1)
+>>> book_to_update.title = 'C#'
+
+
+
+9- Query: Change the first name of the 4th author to Bill
+
+
+>>> author_to_update = Author.objects.get(id=4)
+>>> author_to_update.first_name = 'Bill'
+>>> print(author_to_update.first_name)
+Bill
+
+
+
+
+10- Query: Assign the first author to the first 2 books
+
+>>> this_book = Book.objects.get(id=1)
+>>> this_book1 = Book.objects.get(id=2) 
+>>> this_publisher = Publisher.objects.get(id=1)        
+
+
+
+
+
+11- Query: Assign the second author to the first 3 books
+
+
+this_book = Book.objects.get(id=1)
+this_book1 = Book.objects.get(id=2)	
+this_book2 = Book.objects.get(id=3)	
+this_publisher = Author.objects.get(id=2)	
+    
+
+this_publisher.books.add(this_book)		
+this_publisher.books.add(this_book1)
+this_publisher.books.add(this_book2)
+
+
+
+
+
+12- Query: Assign the third author to the first 4 books
+
+this_book = Book.objects.get(id=1)
+this_book1 = Book.objects.get(id=2)	
+this_book2 = Book.objects.get(id=3)
+this_book3 = Book.objects.get(id=4)	
+this_publisher = Author.objects.get(id=3)	
+    
+
+this_publisher.books.add(this_book)		
+this_publisher.books.add(this_book1)
+this_publisher.books.add(this_book2)
+this_publisher.books.add(this_book3)
+
+
+
+13- Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+
+this_book = Book.objects.get(id=1)
+this_book1 = Book.objects.get(id=2)	
+this_book2 = Book.objects.get(id=3)
+this_book3 = Book.objects.get(id=4)	
+this_book4 = Book.objects.get(id=5)
+this_publisher = Author.objects.get(id=5)	
+    
+
+this_publisher.books.add(this_book)		
+this_publisher.books.add(this_book1)
+this_publisher.books.add(this_book2)
+this_publisher.books.add(this_book3)
+this_publisher.books.add(this_book4)
+
+	
+
+14- Query: Retrieve all the authors for the 3rd book
+
+this_book = Book.objects.get(id=3)
+authors= this_book.authors.all()
+for author in authors:
+ print(author.first_name, author.last_name)
+
+
+15- Query: Remove the first author of the 3rd book
+
+book = Book.objects.get(id=3)
+first_author = book.authors.first()
+
+
+book.authors.remove(first_author)
+
+
+
+16- Query: Add the 5th author as one of the authors of the 2nd book
+this_book = Book.objects.get(id=2)
+this_publisher = Author.objects.get(id=5)	
+this_publisher.books.add(this_book)	
+
+
+17- Query: Find all the books that the 3rd author is part of
+
+books = Book.objects.filter(authors__id=3)
+
+
+
+18- Query: Find all the authors that contributed to the 5th book
+books = Book.objects.filter(authors__id=5)
+
+
+19- Submit your .txt file that contains all the queries you ran in the shell
