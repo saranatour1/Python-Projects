@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
+
 from .models import *
 # Create your views here.
 
@@ -46,14 +47,16 @@ def showSingle(request,shownumber):
 
 #edit one of the shows form page 
 def editShow(request,shownumber):
+
   context={
-    "show":Shows.objects.get(id=shownumber)
+    "show":Shows.objects.get(id=shownumber),
+
   }
   return render(request, "editshow.html",context)
 
 def update_show(request,shownumber):
   if request.method=='POST':
-    errors = Shows.objects.basic_validator(request.POST)
+    errors = Shows.objects.basic_validator(request.POST, show_id=shownumber)
     if len(errors) > 0:
       for key, value in errors.items():
         messages.error(request, value)
@@ -64,6 +67,7 @@ def update_show(request,shownumber):
       show.network = request.POST['network']
       show.release_date = request.POST['releasedate']
       show.descreption = request.POST['descreption']
+      
       print(show.release_date)
       print(request.POST['releasedate'])
       show.save()

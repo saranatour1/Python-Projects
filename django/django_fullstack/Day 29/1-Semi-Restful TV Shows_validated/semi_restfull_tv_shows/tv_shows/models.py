@@ -11,12 +11,12 @@ import datetime
 
 
 class ShowsManeger(models.Manager):
-	def basic_validator(self, postData):
+	def basic_validator(self, postData,show_id=None):
 		errors = {}
 		# add keys and values to errors dictionary for each invalid field
 		if len(postData['title']) < 2 :
 			errors["title"] = "the show title should be more than 2 charecters"
-		if Shows.objects.filter(title=postData['title']).exists():
+		if Shows.objects.exclude(id=show_id).filter(title=postData['title']).exists():
 			errors["title"] = "the title already exists"
 		if len(postData['network']) < 3:
 			errors["network"] = "Network name should be more than 3 charechters"
