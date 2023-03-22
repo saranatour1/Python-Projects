@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from .models import *
 # Create your views here.
 
@@ -21,11 +22,18 @@ def addShow(request):
 # Proccessing the adding of shows 
 def adding(request):
   if request.method=='POST':
-    show=Shows.objects.create(title =request.POST['title'],
+    errors = Shows.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+      for key, value in errors.items():
+        messages.error(request, value)
+      return redirect('/shows/new')
+    else:
+      show=Shows.objects.create(title =request.POST['title'],
                         network=request.POST['network'],
                         release_date=request.POST['releasedate'],
                         desc=request.POST['descreption'])
-    show_id=show.id
+      messages.success(request, "TV show has been  successfully added")
+      show_id=show.id
   return redirect(f'/shows/{show_id}') # route back to /shows, to view a table of the shows.
 
 #showSingle route to show the show with the id
@@ -44,15 +52,22 @@ def editShow(request,shownumber):
   return render(request, "editshow.html",context)
 
 def update_show(request,shownumber):
-  show = Shows.objects.get(id=shownumber)
-  show.title = request.POST['title']
-  show.network = request.POST['network']
-  show.release_date = request.POST['releasedate']
-  show.descreption = request.POST['descreption']
-  print(show.release_date)
-  print(request.POST['releasedate'])
-  show.save()
-  
+  if request.method=='POST':
+    errors = Shows.objects.basic_validator(request.POST)
+    if len(errors) > 0:
+      for key, value in errors.items():
+        messages.error(request, value)
+      return redirect(f'/shows/{shownumber}/edit')
+    else:
+      show = Shows.objects.get(id=shownumber)
+      show.title = request.POST['title']
+      show.network = request.POST['network']
+      show.release_date = request.POST['releasedate']
+      show.descreption = request.POST['descreption']
+      print(show.release_date)
+      print(request.POST['releasedate'])
+      show.save()
+      messages.success(request, "TV show has been  successfully added")  
   return redirect(f'/shows/{show.id}')
 
 
