@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show a Certain show</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end container">
+      <a class="btn btn-link" href="/shows">Go Back</a>
+    </div>
+    <div class="container container-sm container-md mt-5">
+      <div class="row">
+        <hgroup>
+          <h3>TV show #{{show_to_view.id}}</h3>
+          <p>Title: {{show_to_view.title}}</p>
+          <p>Network: {{show_to_view.network}}</p>
+          <p>Release Date: {{show_to_view.release_date}}</p>
+        </hgroup>
+        <dl class="row">
+          <dt class="col-sm-2">Descreption:</dt>
+          <dd class="col-sm-9">{{show_to_view.desc}}</dd>
+        </dl>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <p>Last updated:{{show_to_view.updated_at}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          
+          <a class="btn btn-link" href="/shows/{{show_to_view.id}}/edit">Edit</a
+          >|
+          <a class="btn btn-link" href="/shows/{{show_to_view.id}}/destroy"
+            >Delete</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
