@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The main User page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
+  </head>
+  <body>
+    <!-- Nav bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary container-fluid">
+      <div class="container">
+        <a class="navbar-brand" href="#">Coding dojo wall </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Welcome Sara!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link btn btn-info active" type="button"> Logout </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Main messages section -->
+    <div class="container container-sm container-lg w-50 mx-auto mt-5 py-4">
+      <form action="/add_new_message" method="post">
+        <div class="mb-3">
+          <label for="message" class="form-label h5">Post a message</label>
+          <textarea class="form-control" id="message" name="message" placeholder="write your message here" rows="5"></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-info px-2 rounded-4" type="submit"> Post a message </button>
+        </div>
+      </form>
+      <div class="d-flex flex-column">
+        <div class="w-90 word-wrap mt-3">
+          <div class="d-flex align-items-center justify-content-between "> {#messages#} 
+            <p>
+              <strong>Sara Natour</strong> - <span class="small text-body-secondary">26-03-2023</span>
+            </p>
+            <p>
+              <span class="small text-body-secondary justify-content-end">
+                <em>main message</em>
+              </span>
+            </p>
+          </div>
+          <p class="ps-2"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo dolore debitis aperiam porro ut voluptatem doloribus ex consectetur corrupti dicta at, quos itaque autem reiciendis, molestias vitae enim, error exercitationem! </p>
+          <hr/>
+        </div>
+
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+  </body>
+</html>
