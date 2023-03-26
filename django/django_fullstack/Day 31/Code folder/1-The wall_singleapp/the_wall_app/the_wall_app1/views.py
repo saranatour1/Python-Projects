@@ -85,7 +85,7 @@ def add_message(request):
 
 # views the page of the wall, where users can add comments and messages
 def view_wall(request):
-    messages = Messages.objects.all()
+    messages = Messages.objects.all().order_by("-created_at")
     user_id=request.session['newUser']
     logged_user = Users.objects.get(id=user_id)
     for message in messages:
