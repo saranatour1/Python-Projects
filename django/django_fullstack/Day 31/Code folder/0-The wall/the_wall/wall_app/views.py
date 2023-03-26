@@ -10,7 +10,7 @@ def main_page(request):
     context={
         'newUser':user,
         'all_messages':Messages.objects.all(),
-    }
+        }
 
     return render(request, "index.html", context)
 
