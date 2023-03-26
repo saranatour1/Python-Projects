@@ -16,7 +16,7 @@ def handle_regestration(request):
         if len(errors) > 0:
             for key , value in errors.items():
                 messages.error(request,value)
-            return redirect('/regestration_page')
+            return redirect('/')
         else:
             password = request.POST['password']
             pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
@@ -37,7 +37,7 @@ def successfull(request):
     if 'newUser' in request.session:
         return redirect('/wall')
     else:
-        return redirect('/regestration_page')
+        return redirect('/')
 
 # route to handle login 
 
@@ -52,25 +52,25 @@ def handle_login(request):
                 messages.error(request, 'Invalid password')
         else:
             messages.error(request, 'Invalid email')
-    return redirect('/regestration_page')
+    return redirect('/')
 
 def logout(request):
   request.session.flush()
-  return redirect('/regestration_page')
+  return redirect('/')
 
 
 # the main page to display all the messages, allow users to post messages as well.
-def main_page(request):
+def main_page1(request):
     if 'newUser' in request.session:
         user_id=request.session['newUser']
         user = Users.objects.get(id=user_id) 
         context={
             'newUser':user,
-            'all_messages':Messages.objects.all(),
+            'all_messages':Messages.objects.all().order_by("-created_at"),
         }
         return render(request, "index.html", context)
     else:
-        return redirect('/regestration_page')
+        return redirect('/wall')
 
 
 
@@ -85,13 +85,19 @@ def add_message(request):
 
 # views the page of the wall, where users can add comments and messages
 def view_wall(request):
+    messages = Messages.objects.all()
     user_id=request.session['newUser']
-    user = Users.objects.get(id=user_id) 
-    context={
-        'newUser': user,
-        'all_messages': Messages.objects.all(),
-    }
+    logged_user = Users.objects.get(id=user_id)
+    for message in messages:
+        comments = message.comments.all().order_by("-created_at")
+        message.comment = comments
+    context = {"all_messages": messages,
+              "comments": comments,
+              "newUser":logged_user,
+              }
     return render(request, "thewall.html", context)
+
+
 
 
 # handle adding a comment
@@ -101,5 +107,5 @@ def add_comment(request):
         logged_user = Users.objects.get(id=user_id)
         message = Messages.objects.get(id=request.POST['message_id'])
         Comments.objects.create(comment=request.POST['comment'], user=logged_user, message=message)
-    return redirect('/wall')
+    return redirect('/wall-and-comments')
   
