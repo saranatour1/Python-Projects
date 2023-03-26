@@ -17,14 +17,12 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Welcome Sara!</a>
+            <li class="nav-item pe-2 mt-2">
+              <p>Success! Welcome, <b>{{newUser.first_name}}</b>!</p>
             </li>
+     
             <li class="nav-item">
-              <a class="nav-link" href="#"></a>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link btn btn-info active" type="button"> Logout </button>
+              <a class="nav-link btn btn-info active" href="/logout"  > Logout </a>
             </li>
           </ul>
         </div>
@@ -33,6 +31,7 @@
     <!-- Main messages section -->
     <div class="container container-sm container-lg w-50 mx-auto mt-5 py-4">
       <form action="/add_new_message" method="post">
+        {% csrf_token %} 
         <div class="mb-3">
           <label for="message" class="form-label h5">Post a message</label>
           <textarea class="form-control" id="message" name="message" placeholder="write your message here" rows="5"></textarea>
@@ -42,47 +41,50 @@
         </div>
       </form>
       <div class="d-flex flex-column">
-        <div class="w-90 word-wrap mt-3">
-          <div class="d-flex align-items-center justify-content-between "> {#messages#} 
-            <p>
-              <strong>Sara Natour</strong> - <span class="small text-body-secondary">26-03-2023</span>
-            </p>
-            <p>
-              <span class="small text-body-secondary justify-content-end">
-                <em>main message</em>
-              </span>
-            </p>
-          </div>
-          <p class="ps-2"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo dolore debitis aperiam porro ut voluptatem doloribus ex consectetur corrupti dicta at, quos itaque autem reiciendis, molestias vitae enim, error exercitationem! </p>
+        {%for message in all_messages|dictsortreversed:"created_at" %}
           <div class="w-90 word-wrap mt-3">
             <div class="d-flex align-items-center justify-content-between "> {#messages#} 
-              <p class="ps-3">
-                <strong>Sara Natour</strong> - <span class="small text-body-secondary">26-03-2023</span>
+              <p>
+                <strong>{{message.user.first_name}} {{message.user.last_name}}</strong> - <span class="small text-body-secondary">{{ message.created_at }}</span>
               </p>
               <p>
                 <span class="small text-body-secondary justify-content-end">
-                  <em>comments </em>{#comments#}
+                  <em>main message</em>
                 </span>
               </p>
             </div>
-            <p class="ps-4"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo dolore debitis aperiam porro ut voluptatem doloribus ex consectetur corrupti dicta at, quos itaque autem reiciendis, molestias vitae enim, error exercitationem! </p>
-          </div>
-          <form action="/add_new_comment" method="post"  class="ps-4">
-            <div class="mb-3">
-              <label for="comment" class="form-label h5">Post a comment</label>
-              <textarea class="form-control" id="comment" name="comment" placeholder="write your comment here" rows="3"></textarea>
+            <p class="ps-2"> {{ message.message }} </p>
+            {%for comments in messages.comments.all|dictsortreversed:"created_at"%}
+              <div class="w-90 word-wrap mt-3">
+                <div class="d-flex align-items-center justify-content-between "> {#comments#} 
+                  <p class="ps-3">
+                    <strong>{{comments.user.first_name}} {{comments.user.last_name}}</strong> - <span class="small text-body-secondary">{{ comment.created_at }}</span>
+                  </p>
+                  <p>
+                    <span class="small text-body-secondary justify-content-end">
+                      <em>comments </em>{#comments#}
+                    </span>
+                  </p>
+                </div>
+                <p class="ps-4"> {{comment.comment}} </p>
+              </div>
+            {%endfor%}
+              <form action="/add_new_comment" method="post"  class="ps-4">
+                {% csrf_token %} 
+                <input type="hidden" name="message_id" value="{{message.id}}">
+                <div class="mb-3">
+                  <label for="comment" class="form-label h5">Post a comment</label>
+                  <textarea class="form-control" id="comment" name="comment" placeholder="write your comment here" rows="3"></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-info px-2 rounded-4" type="submit"> Post a comment</button>
+                </div>
+              </form>
+              <hr />
             </div>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-info px-2 rounded-4" type="submit"> Post a comment</button>
-            </div>
-          </form>
+          {%endfor%}
 
 
-
-          <hr />
-
-
-        </div>
         
       </div>
     </div>

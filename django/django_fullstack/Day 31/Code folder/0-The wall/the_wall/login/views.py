@@ -24,15 +24,17 @@ def handle_regestration(request):
                         email=request.POST['email'],
                         birthday=request.POST['birthday'],
                         password_hash=pw_hash)
-    newUser=Users.objects.last().first_name
+    newUser=Users.objects.last().id
     request.session['newUser']=newUser
-  return redirect('/success')
+  return redirect('/')
 
+# Making the logged user log in to the wall app not to the success page
 def successfull(request):
-  context={
-    'newUser':request.session['newUser'],
-  }
-  return render(request, "success.html",context)
+    if 'newUser' not in request.session:
+        return redirect('/regestration_page')
+    request.session['newUser'] = Users.objects.get(id=request.session['newUser'])  # user id 
+    return redirect('/wall')
+
 
 
 # route to handle login 
@@ -40,11 +42,12 @@ def successfull(request):
 
 def handle_login(request):
     if request.method == 'POST':
-        user = Users.objects.filter(email=request.POST['email']).first()
+        user = Users.objects.filter(email=request.POST['email'])
         if user:
+            logged_user = user[0]
             if bcrypt.checkpw(request.POST['password'].encode(), user.password_hash.encode()):
-                request.session['newUser'] = user.first_name
-                return redirect('/success')
+                request.session['newUser'] = logged_user.id
+                return redirect('/wall')
             else:
                 messages.error(request, 'Invalid password')
         else:
