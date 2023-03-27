@@ -7,7 +7,7 @@ import bcrypt
 #the main method to show the form page
 def main_page(request):
   return render(request,"main.html")
-
+edit=0
 #route to handle regestration 
 #route to handle regestration 
 def handle_regestration(request):
@@ -116,7 +116,35 @@ def view_book(request,book_id):
   context={
       'newUser':user,
       'book':book,
+ 
   }
   return render(request,"viewbook.html",context)
 
+# I don't know what this is 
+def edit(request,book_id):
+  user_id=request.session['newUser']
+  user = Users.objects.get(id=user_id)
+  book=Books.objects.get(id=book_id)
+  context={
+      'newUser':user,
+      'book':book,}
+  return render(request,'edit.html',context)
 
+# updating the book from the request 
+
+def update_book(request, book_id):
+  if request.method=='POST':
+    book_to_update= Books.objects.get(id=book_id)
+    user_id=request.session['newUser']
+    user = Users.objects.get(id=user_id)
+    book_to_update.title=request.POST['book_title']
+    book_to_update.desc=request.POST['descreption']
+    book_to_update.save()
+  return redirect(f'/books/{book_id}')
+
+def book_to_delete(request,book_id):
+  book_to_destroy= Books.objects.get(id=book_id)
+  user_id=request.session['newUser']
+  if book_to_destroy.uploaded_by.id==user_id:
+    book_to_destroy.delete()
+  return redirect('/books')
