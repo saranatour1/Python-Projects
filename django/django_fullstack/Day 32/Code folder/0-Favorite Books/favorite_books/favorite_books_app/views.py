@@ -66,6 +66,7 @@ def books_route(request):
       user = Users.objects.get(id=user_id) 
       context={
           'newUser':user,
+          'all_books':Books.objects.all().order_by("-created_at"),
           # 'all_messages':Messages.objects.all().order_by("-created_at"),
       }
       return render(request, "books.html", context)
@@ -88,3 +89,34 @@ def add_books(request):
           favorited_book=Books.objects.last()
           user.liked_books.add(favorited_book)
     return redirect('/books')
+  
+# add to favorites route
+def add_to_favorites(request,book_id):
+  user_id=request.session['newUser']
+  user=Users.objects.get(id=user_id)
+  book_to_favorite=Books.objects.get(id=book_id)
+  user.liked_books.add(book_to_favorite)
+  return redirect('/books')
+
+
+# remove from favorites 
+def remove_from_favorites(request, book_id):
+  user_id = request.session['newUser']
+  user = Users.objects.get(id=user_id)
+  book_to_remove = Books.objects.get(id=book_id)
+  user.liked_books.remove(book_to_remove)
+  return redirect('/books')
+
+# View book of a certain id 
+
+def view_book(request,book_id):
+  user_id=request.session['newUser']
+  user = Users.objects.get(id=user_id)
+  book=Books.objects.get(id=book_id)
+  context={
+      'newUser':user,
+      'book':book,
+  }
+  return render(request,"viewbook.html",context)
+
+

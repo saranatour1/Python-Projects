@@ -9,4 +9,7 @@ urlpatterns = [
     path('logout',views.logout),
     path('books',views.books_route),
     path('addbooks',views.add_books),
+    path('add-to-favorites/<int:book_id>',views.add_to_favorites),
+    path('remove-from-favorites/<int:book_id>',views.remove_from_favorites),
+    path('books/<int:book_id>',views.view_book)
 ]
