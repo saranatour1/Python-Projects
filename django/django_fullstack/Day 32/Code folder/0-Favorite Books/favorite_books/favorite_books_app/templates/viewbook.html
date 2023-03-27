@@ -8,93 +8,84 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary container-fluid align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="/books">Welcome, {{newUser.first_name}} !</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end align-items-center " id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link btn btn-info active p-1" href="/logout"  > Logout </a>
+              <a class="nav-link btn btn-outline-primary me-2" href="/logout">Logout</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="container container-sm container-md ">
-      <div class="row">
-      {% if newUser.id == book.uploaded_by.id %}
-      <div class="col-12 col-sm-6 col-md-6 mb-4">
-        <h1 class="mt-4 text-center">editing book # {{book.id}}</h1>
-          <form action="/books/{{book.id}}/update" method="post">
+      <div class="row"> 
+        {% if newUser.id == book.uploaded_by.id %} 
+        <div class="col-12 col-sm-6 col-md-6 mb-4">
+          <h1 class="mt-4 text-center">editing book # {{book.id}}</h1>
+          <form action="/books/{{book.id}}/update" method="post"> 
             {%csrf_token%}
             <div class="mb-3 row">
               <label for="book_title" class="form-label col-sm-2">Title</label>
               <div class="col-sm-9">
-                <input type="text"  class="form-control"  placeholder="book title" name="book_title" value="{{book.title}}"/>
+                <input type="text" class="form-control" placeholder="book title" name="book_title" value="{{book.title}}" />
               </div>
             </div>
             <div class="mb-3 row">
               <label for="descreption" class="form-label col-sm-2">Descreption</label>
               <div class="col-sm-9">
-                <textarea name="descreption" id="descreption" class="form-control" placeholder="Book Descreption" rows="3" >{{book.desc}}</textarea>
+                <textarea name="descreption" id="descreption" class="form-control" placeholder="Book Descreption" rows="3">{{book.desc}}</textarea>
               </div>
             </div>
             <div class="d-flex justify-content-between w-50 mx-auto">
-             <p><button
-                type="submit"
-                class="btn btn-light shadow p-3 mb-5 bg-body-tertiary rounded"
-              >
-                update
-              </button></p>
-              <p><a href="/books/delete/{{book.id}}">delete this book</a></p>
+              <p>
+                <button type="submit" class="btn btn-light shadow p-3 mb-5 bg-body-tertiary rounded"> update </button>
+              </p>
+              <p>
+                <a href="/books/delete/{{book.id}}">delete this book</a>
+              </p>
             </div>
-            
           </form>
-      </div>
-      {%else%}
-        <div class="col-12 col-sm-6 col-md-6">
-            <h1 class="text-start h1 mt-4">{{book.title}}</h1>
-            <p >
-              Added by: <span class="h6">{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}} </span>
-            </p>
-            <p >
-            uploaded on :<span class="h6"><em>{{book.created_at}}</em> </span>
-            </p>
-            <p >
-              last Updated on:<span class="h6"><em>{{book.updated_at}}</em> </span>
-            </p>
-            <p>
-              Book descreption: {{book.desc}}
-            </p>
+        </div> {%else%} <div class="col-12 col-sm-6 col-md-6">
+          <h1 class="text-start h1 mt-4">{{book.title}}</h1>
+          <p> Added by: <span class="h6">{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}} </span>
+          </p>
+          <p> uploaded on : <span class="h6">
+              <em>{{book.created_at}}</em>
+            </span>
+          </p>
+          <p> last Updated on: <span class="h6">
+              <em>{{book.updated_at}}</em>
+            </span>
+          </p>
+          <p> Book descreption: {{book.desc}}
+          </p>
+        </div> 
+        {%endif%} 
+        <div class="col-12 col-sm-6 col-md-6 ps-4">
+          <h3 class="text-start mt-3"> Users who like this book </h3>
+          {% for user in book.users_who_like.all %}
+            <ul class="list-unstyled">
+            <li class="">{{user.first_name}} {{user.last_name}}</li> 
+            {% endfor %} 
+            {% if newUser.id == book.uploaded_by.id %} 
+            <li>Added to your favorites</li>
+            {% elif newUser in book.users_who_like.all %} <li>
+              <a href="/remove-from-favorites/{{book.id}}" class="btn btn-link">Remove from Favorites</a>
+            </li>
+            {% else %} <li>
+              <a href="/add-to-favorites/{{book.id}}" class="btn btn-link">Add to Favorites</a>
+            </li> 
+            {% endif %}
+          </ul>
         </div>
-        {%endif%}
-      <div class="col-12 col-sm-6 col-md-6 ps-4">
-        <h3 class="text-start mt-3">
-          Users who like this book 
-        </h3>
-        {% for user in book.users_who_like.all %}
-        <ul class="list-unstyled">
-          <li class="">{{user.first_name}} {{user.last_name}}</li>
-        {% endfor %}
-        {% if newUser.id == book.uploaded_by.id %}
-          <li>Added to your favorites</li>
-        {% elif newUser in book.users_who_like.all %}
-          <li><a href="/remove-from-favorites/{{book.id}}" class="btn btn-link">Remove from Favorites</a></li>
-        {% else %}
-          <li><a href="/add-to-favorites/{{book.id}}" class="btn btn-link">Add to Favorites</a></li>
-        {% endif %}  
-        </ul>
-      
       </div>
     </div>
-
-    </div>
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>
