@@ -55,7 +55,7 @@
               </p>
             </div>
             <p class="ps-2"> {{ message.message }} </p>
-            {%for comments in messages.comments.all|dictsortreversed:"created_at"%}
+            {%for for comment in message.comments.all%}
               <div class="w-90 word-wrap mt-3">
                 <div class="d-flex align-items-center justify-content-between "> {#comments#} 
                   <p class="ps-3">
