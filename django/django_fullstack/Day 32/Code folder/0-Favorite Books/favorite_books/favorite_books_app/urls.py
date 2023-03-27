@@ -12,7 +12,7 @@ urlpatterns = [
     path('add-to-favorites/<int:book_id>',views.add_to_favorites),
     path('remove-from-favorites/<int:book_id>',views.remove_from_favorites),
     path('books/<int:book_id>',views.view_book),
-    path('books/edit/<int:book_id>',views.edit),
+    # path('books/edit/<int:book_id>',views.edit),
     path('books/<int:book_id>/update',views.update_book),
     path('books/delete/<int:book_id>',views.book_to_delete),
 ]

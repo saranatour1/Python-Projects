@@ -121,14 +121,14 @@ def view_book(request,book_id):
   return render(request,"viewbook.html",context)
 
 # I don't know what this is 
-def edit(request,book_id):
-  user_id=request.session['newUser']
-  user = Users.objects.get(id=user_id)
-  book=Books.objects.get(id=book_id)
-  context={
-      'newUser':user,
-      'book':book,}
-  return render(request,'edit.html',context)
+# def edit(request,book_id):
+#   user_id=request.session['newUser']
+#   user = Users.objects.get(id=user_id)
+#   book=Books.objects.get(id=book_id)
+#   context={
+#       'newUser':user,
+#       'book':book,}
+#   return render(request,'edit.html',context)
 
 # updating the book from the request 
 
