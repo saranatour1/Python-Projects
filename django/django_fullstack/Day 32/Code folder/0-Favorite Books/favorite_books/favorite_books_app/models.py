@@ -29,7 +29,6 @@ class UsersManeger(models.Manager):
         user_birthday = datetime.datetime.strptime(postData['birthday'], '%Y-%m-%d').date()
         if user_birthday > datetime.date.today() - relativedelta(years=13):
           errors["birthday"] = "You must be at least 13 years old to register."
-        
         return errors
   
 
@@ -44,13 +43,29 @@ class Users(models.Model):
     objects = UsersManeger()
   # liked_books = a list of books a given user likes
   # books_uploaded = a list of books uploaded by a given user
+  
+# Books validation 
+class BooksManeger(models.Manager):
+    def validate_book(self, postData):
+        errors = {}
+        # add keys and values to errors dictionary for each invalid field
+        #Validate regestration
+        if not postData['book_title']:
+            errors["book_title"] = "the book title must not be empty!"
+        if len(postData['descreption']) < 5:
+            errors["descreption"] = "the book descreption must be more than 5 charecter! "
+        return errors
+  
+  
 
 class Books(models.Model):
   title= models.CharField(max_length=255)
   desc=models.TextField()
-  
+  uploaded_by=models.ForeignKey(Users,related_name="books_uploaded",on_delete=models.CASCADE)
+  users_who_like =models.ManyToManyField(Users,related_name="liked_books")
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
+  objects = BooksManeger()
   
   # uploaded_by = user who uploaded a given book
   # users_who_like = a list of users who like a given book
