@@ -34,7 +34,7 @@
       <div class=" row mt-5 mx-auto w-100">
         <div class="col-12 col-lg-6 col-md-12 justify-content-center">
           <h5 class="mb-4 text-center">Recent book reviews:</h5>
-          {% for book in all_the_books %}
+          {% for book in all_three_books %}
           <div class="card w-75 mb-3">
             <div class="card-body">
               <h5 class="card-title"><a href="/books/{{ book.id }}">{{ book.title }}</a></h5>
@@ -63,7 +63,12 @@
         </div>
         
         <div class="col-12 col-lg-6 col-md-12 justify-content-center">
-
+          <h5 class="mb-4 text-center">Also see other books:</h5>
+          <div class="w-50 mx-auto border h-100" style="overflow-y: auto;">
+            {% for book in all_the_books %}
+            <h5 class="card-title"><a href="/books/{{ book.id }}">{{ book.title }}</a></h5>
+            {%endfor%}
+          </div>
         </div>
       </div>
 

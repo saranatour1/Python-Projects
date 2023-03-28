@@ -62,12 +62,14 @@ def logout(request):
 
 # Route /books
 # Redirecting to the main page where a list of all the books is being shown
+# recent_reviews = Review.objects.order_by('-created_at')
 def view_books_list(request):
   user_id= request.session['newUser']
   user=User.objects.get(id=user_id)
   context={
           'newUser':user,
-          'all_the_books':Book.objects.all().order_by("-created_at"),
+          'all_three_books':Book.objects.all().order_by("-created_at")[:3],
+          'all_the_books':Book.objects.all().order_by("-created_at")[3:],
           'all_the_reviews':Review.objects.all(),  
           }
   
