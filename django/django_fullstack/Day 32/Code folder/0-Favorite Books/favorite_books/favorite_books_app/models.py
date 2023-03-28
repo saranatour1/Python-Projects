@@ -49,17 +49,29 @@ class BooksManeger(models.Manager):
     def validate_book(self, postData):
         errors = {}
         # add keys and values to errors dictionary for each invalid field
-        #Validate regestration
+        #Validate registration
         if not postData['book_title']:
             errors["book_title"] = "the book title must not be empty!"
         if len(postData['descreption']) < 5:
-            errors["descreption"] = "the book descreption must be more than 5 charecter! "
+            errors["descreption"] = "the book description must be more than 5 characters! "
+
+        # Check if the book with the same title already exists
+        book_id = postData.get('book_id', None)
+        book_title = postData['book_title']
+        if book_id:
+            book = Books.objects.get(id=book_id)
+            if book.title != book_title and Books.objects.filter(title=book_title).exists():
+                errors['book_title'] = 'A book with this title already exists'
+        elif Books.objects.filter(title=book_title).exists():
+            errors['book_title'] = 'A book with this title already exists'
+
         return errors
+
   
   
 
 class Books(models.Model):
-  title= models.CharField(max_length=255)
+  title= models.CharField(max_length=255,unique=True)
   desc=models.TextField()
   uploaded_by=models.ForeignKey(Users,related_name="books_uploaded",on_delete=models.CASCADE)
   users_who_like =models.ManyToManyField(Users,related_name="liked_books")
