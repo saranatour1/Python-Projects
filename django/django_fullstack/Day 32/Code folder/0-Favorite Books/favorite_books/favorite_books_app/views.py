@@ -132,16 +132,19 @@ def view_book(request,book_id):
 
 # updating the book from the request 
 
+# Book updating proccess
 def update_book(request, book_id):
   if request.method=='POST':
     book_to_update= Books.objects.get(id=book_id)
     user_id=request.session['newUser']
-    user = Users.objects.get(id=user_id)
-    book_to_update.title=request.POST['book_title']
-    book_to_update.desc=request.POST['descreption']
-    book_to_update.save()
+    if user_id ==book_to_update.uploaded_by.id: #probably unnessasary
+      # user = Users.objects.get(id=user_id)
+      book_to_update.title=request.POST['book_title']
+      book_to_update.desc=request.POST['descreption']
+      book_to_update.save()
   return redirect(f'/books/{book_id}')
 
+# Book deleting proccedure 
 def book_to_delete(request,book_id):
   book_to_destroy= Books.objects.get(id=book_id)
   user_id=request.session['newUser']
