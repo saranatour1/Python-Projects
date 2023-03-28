@@ -35,7 +35,20 @@
               <div class="col-sm-9">
                 <input type="text" class="form-control" placeholder="book title" name="book_title" value="{{book.title}}" />
               </div>
+              
             </div>
+            <div class="mb-3 row ">
+              <p> Added by: <span class="h6 mt-3">{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}} </span>
+                <p> uploaded on : <span class="h6">
+                  <em>{{book.created_at}}</em>
+                </span>
+              </p>
+              <p> last Updated on: <span class="h6">
+                  <em>{{book.updated_at}}</em>
+                </span>
+              </p>
+            </div>
+
             <div class="mb-3 row">
               <label for="descreption" class="form-label col-sm-2">Descreption</label>
               <div class="col-sm-9">

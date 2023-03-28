@@ -64,7 +64,6 @@ class BooksManeger(models.Manager):
                 errors['book_title'] = 'A book with this title already exists'
         elif Books.objects.filter(title=book_title).exists():
             errors['book_title'] = 'A book with this title already exists'
-
         return errors
 
   
