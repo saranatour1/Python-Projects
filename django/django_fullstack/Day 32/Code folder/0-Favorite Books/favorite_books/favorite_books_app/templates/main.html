@@ -65,18 +65,18 @@
         {% endif %}
 
       </div>
-      <div class="col-6 ">
+      <div class="col-12 col-md-6 col-lg-6 mx-auto ">
         <h1 class="text-center mt-3 mb-3">Login</h1>
         <form action="/handle_login" method="post">
           {% csrf_token %}
           <div class=" row mb-3 mb-2 ms-3">
-            <label for="email" class="form-label col-2">Email: </label>
+            <label for="email" class="form-label col-3">Email: </label>
             <div class="col-6">
               <input type="email" class="form-control " name="email" placeholder="Jane@email.com" autocomplete="off">
             </div>
           </div>
           <div class=" row mb-3 mb-2 ms-3">
-            <label for="password" class="form-label col-2 ">Password: </label>
+            <label for="password" class="form-label col-3">Password: </label>
             <div class="col-6">
               <input type="password" class="form-control " name="password" placeholder="*****************" autocomplete="off">
             </div>
