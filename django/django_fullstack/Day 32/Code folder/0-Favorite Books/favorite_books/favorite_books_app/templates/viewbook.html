@@ -39,7 +39,7 @@
             <div class="mb-3 row">
               <label for="descreption" class="form-label col-sm-2">Descreption</label>
               <div class="col-sm-9">
-                <textarea name="descreption" id="descreption" class="form-control" placeholder="Book Descreption" rows="3">{{book.desc}}</textarea>
+                <textarea name="descreption" id="descreption" class="form-control" placeholder="Book Descreption" rows="5">{{book.desc}}</textarea>
               </div>
             </div>
             <div class="d-flex justify-content-between w-50 mx-auto">
@@ -51,7 +51,9 @@
               </p>
             </div>
           </form>
-        </div> {%else%} <div class="col-12 col-sm-6 col-md-6">
+        </div>
+          {%else%} 
+          <div class="col-12 col-sm-6 col-md-6">
           <h1 class="text-start h1 mt-4">{{book.title}}</h1>
           <p> Added by: <span class="h6">{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}} </span>
           </p>
@@ -68,7 +70,7 @@
         </div> 
         {%endif%} 
         <div class="col-12 col-sm-6 col-md-6 ps-4">
-          <h3 class="text-start mt-3"> Users who like this book </h3>
+          <h3 class="text-start mt-4"> Users who like this book </h3>
           {% for user in book.users_who_like.all %}
             <ul class="list-unstyled">
             <li class="">{{user.first_name}} {{user.last_name}}</li> 
