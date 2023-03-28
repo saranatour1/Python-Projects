@@ -8,7 +8,66 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   </head>
   <body>
-    <!-- Nav  -->
+    <!-- Nav-bar, to welcome the user, show the logout, add books and reviews -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/books">Welcome, {{newUser.first_name}} !</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-primary me-2" href="/books/add">Add book and Review </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-primary me-2" href="/logout">Logout</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Two sections , one for the recent book reviews , while the other is for showing all the different books -->
+    <div class="container container-sm container-md container-lg">
+      <div class=" row mt-5 mx-auto w-100">
+        <div class="col-12 col-lg-6 col-md-12 justify-content-center">
+          <h5 class="mb-4 text-center">Recent book reviews:</h5>
+          {% for book in all_the_books %}
+          <div class="card w-75 mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/books/{{ book.id }}">{{ book.title }}</a></h5>
+              {% for author in book.authors.all %}
+              <p class="card-text mt-2">{{ author.first_name }} {{ author.last_name }}</p>
+              {% endfor %}
+              {% for review in all_the_reviews %}
+              {% if review.book == book %}
+              <p class="card-text">Rating:
+                {% for rating in review.rating %}
+                  {% if rating < review.rating %}
+                    <span>&#9733;</span>
+                  {% else %}
+                    <span>&#9734;</span>
+                  {% endif %}
+                {% endfor %}
+            
+              </p>
+              <p class="card-text"><a href="/users/{{ review.user.id }}">{{ review.user.first_name }} {{ review.user.last_name }}</a>: {{ review.review_text }}</p>
+              <p class="card-text">{{ review.created_at }}</p>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        
+        <div class="col-12 col-lg-6 col-md-12 justify-content-center">
+
+        </div>
+      </div>
+
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

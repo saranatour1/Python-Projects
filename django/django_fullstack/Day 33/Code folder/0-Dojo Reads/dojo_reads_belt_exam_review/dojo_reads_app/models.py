@@ -90,6 +90,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
     books = models.ManyToManyField(Book, related_name="authors")
+    # authors = models.ManyToManyField(Author, related_name="books")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = AuthorManeger()
@@ -108,7 +109,7 @@ class ReviewManeger(models.Manager):
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE,related_name="reviews")
     rating = models.IntegerField()
     review_text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

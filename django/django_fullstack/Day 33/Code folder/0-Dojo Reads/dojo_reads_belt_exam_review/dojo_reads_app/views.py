@@ -60,11 +60,29 @@ def logout(request):
   request.session.flush()
   return redirect('/')
 
+# Route /books
+# Redirecting to the main page where a list of all the books is being shown
 def view_books_list(request):
   user_id= request.session['newUser']
   user=User.objects.get(id=user_id)
   context={
-          'newUser':user,  
+          'newUser':user,
+          'all_the_books':Book.objects.all().order_by("-created_at"),
+          'all_the_reviews':Review.objects.all(),  
           }
   
   return render(request, "viewbooks.html",context)
+
+# route /books/add
+# redirecting to the add books page 
+def add_books_page(request):
+  return render(request,"addbook.html")
+
+# route to view a book
+def view_book(request,book_id):
+  return render(request,"viewbook.html")
+
+
+# route to view users profile
+def view_user_profile(request):
+  return render(request, "userrating.html") 
