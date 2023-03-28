@@ -124,7 +124,15 @@ def handle_add_book(request):
 
 # route to view a book
 def view_book(request,book_id):
-  return render(request,"viewbook.html")
+  book= Book.objects.get(id=book_id)
+  user_id= request.session['newUser']
+  user=User.objects.get(id=user_id)
+  context={
+    'book_to_view':book,
+    'newUser':user,
+    
+  }
+  return render(request,"viewbook.html",context)
 
 
 # route to view users profile
