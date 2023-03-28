@@ -54,8 +54,64 @@
     <div class="container container-sm container-md container-lg">
       <div class="row mt-5 mx-auto w-100">
         <div class="col-12 col-lg-6 col-md-12 justify-content-center">
+          <h5 class="card-title">Add a new book and review:</h5>
+          <form action="/addbooks" method="post">
+            {%csrf_token%}
+            <div class="mb-3 row">
+              <label for="book_title" class="form-label col-sm-2">Book title: </label>
+              <div class="col-sm-9">
+                <input type="text"  class="form-control" id="book_title"  placeholder="book title" name="book_title"/>
+              </div>
+            </div>
+            <h6 class="text-start"> Author: </h6>
+            <!-- <div class="mb-3 row">
+              {% for author in all_the_authors %}
 
-          
+              <h6>Choose from the list </h6>
+
+              <select class="form-select" aria-label="Default select example" name="author_id">
+                <option selected>-select an author to add- </option>
+                
+                    <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</option>
+                
+              </select>
+
+              {% endfor %}
+            </div> -->
+
+            <div class="mb-3 row">
+              <h6>Or add a new author: </h6>
+              <div class="col-sm-4">
+                <label for="first_name" class="form-label col-sm-2">first name: </label>
+                <input type="text"  class="form-control" id="first_name"  placeholder="first name " name="first_name"/>
+              </div>
+                <div class="col-sm-4">
+                  <label for="last_name" class="form-label col-sm-2">last name: </label>
+                <input type="text"  class="form-control" id="last_name"  placeholder="last name " name="last_name"/>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="review" class="form-label col-sm-2">Review: </label>
+              <div class="col-sm-9">
+                <textarea name="review" id="review" class="form-control" placeholder="Your review" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="rating" class="form-label col-sm-2">Rating: </label>
+              <div class="col-sm-9">
+                <input type="number" name="rating" id="rating" class="form-control" min="0" max="10"/>
+              </div>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-light shadow p-3 mb-5 bg-body-tertiary rounded"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+
         </div>
       </div>
     </div>

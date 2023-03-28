@@ -78,7 +78,49 @@ def view_books_list(request):
 # route /books/add
 # redirecting to the add books page 
 def add_books_page(request):
-  return render(request,"addbook.html")
+  user_id= request.session['newUser']
+  user=User.objects.get(id=user_id)
+  context={
+          'newUser':user,
+          'all_the_authors':Author.objects.all().order_by("-created_at"),
+          }
+  
+  
+  return render(request,"addbook.html",context)
+
+def handle_add_book(request):
+    user_id = request.session['newUser']
+    user = User.objects.get(id=user_id)
+    book_id = None  # set default value for book_id
+    if request.method == 'POST':
+        # to validate more than once since all of these are in different tables
+        book_errors = Book.objects.validate_book(request.POST)
+        author_errors = Author.objects.validate_author(request.POST)
+        review_errors = Review.objects.validate_review(request.POST)
+        errors = {f'book_{key}': value for key, value in book_errors.items()}
+        errors.update({f'author_{key}': value for key, value in author_errors.items()})
+        errors.update({f'review_{key}': value for key, value in review_errors.items()})
+        if errors:
+            for key, value in errors.items():
+                messages.error(request, value, extra_tags=key)
+            return redirect('/books/add')
+        else:
+            book = Book.objects.create(title=request.POST['book_title'], uploaded_by=user)
+            if request.POST['author_id']:
+              added_author=request.POST['author_id']
+            else:
+              added_author = Author.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'])
+            book.authors.add(added_author)
+            Review.objects.create(
+                review_text=request.POST['review'],
+                rating=request.POST['rating'],
+                book=book,
+                user=user
+            )
+            book_id = book.id  # set book_id if there are no errors
+    return redirect(f'books/{book_id}' if book_id else '/books/add')
+
+
 
 # route to view a book
 def view_book(request,book_id):

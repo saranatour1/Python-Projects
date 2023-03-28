@@ -51,8 +51,7 @@ class BookManeger(models.Manager):
         #Validate registration
         if not postData['book_title']:
             errors["book_title"] = "the book title must not be empty!"
-        if len(postData['descreption']) < 5:
-            errors["descreption"] = "the book description must be more than 5 characters! "
+
         # Check if the book with the same title already exists
         book_id = postData.get('book_id', None)
         book_title = postData['book_title']
@@ -67,7 +66,6 @@ class BookManeger(models.Manager):
 # Books
 class Book(models.Model):
   title= models.CharField(max_length=255,unique=True)
-  desc=models.TextField()
   uploaded_by=models.ForeignKey(User,related_name="books_uploaded",on_delete=models.CASCADE)
   # users_who_like =models.ManyToManyField(Users,related_name="liked_books")
   created_at = models.DateTimeField(auto_now_add=True)
@@ -100,10 +98,10 @@ class ReviewManeger(models.Manager):
         errors = {}
         # add keys and values to errors dictionary for each invalid field
         #Validate registration
-        if not postData['review_text']:
-            errors["review_text"] = "You Can't sadly add empty reviews :)"
-        if  len(postData['review_text']) < 3:
-            errors["review_text"] = "Also Your review should contain words, like good or bad"
+        if not postData['review']:
+            errors["review"] = "You Can't sadly add empty reviews :)"
+        if  len(postData['review']) < 3:
+            errors["review"] = "Also Your review should contain words, like good or bad"
         return errors
 # Reviews
 
@@ -114,5 +112,5 @@ class Review(models.Model):
     review_text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    objects = ReviewManeger()
     
