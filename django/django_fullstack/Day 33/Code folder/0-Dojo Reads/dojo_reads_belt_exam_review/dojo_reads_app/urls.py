@@ -13,4 +13,5 @@ urlpatterns = [
     path('books/<int:book_id>',views.view_book),
     path('users/<int:review_user_id>',views.view_user_profile),
     path('addbooks',views.handle_add_book),
+    path('addreview',views.add_review),
 ]

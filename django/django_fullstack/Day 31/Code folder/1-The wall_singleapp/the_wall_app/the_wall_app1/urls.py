@@ -10,5 +10,6 @@ urlpatterns = [
     path('wall',views.main_page1),
     path('add_new_message',views.add_message),
     path('wall-and-comments',views.view_wall),
-    path('add_new_comment',views.add_comment)
+    path('add_new_comment',views.add_comment),
+    path('delete/<int:message_id>',views.delete_message),
 ]

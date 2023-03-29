@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a book and review page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- Nav-bar, to welcome the user, show the logout, add books and reviews -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/books"
+          >Welcome, {{newUser.first_name}} !</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-primary me-2" href="/books"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-primary me-2" href="/logout"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Two sections , one for the recent book reviews , while the other is for showing all the different books -->
+    <div class="container container-sm container-md container-lg">
+      <div class="row mt-5 mx-auto w-100">
+        <div class="col-12 col-lg-6 col-md-12 justify-content-center">
+        <h3 class="mt-4">
+          {{book_to_view.title}}
+        </h3>
+        <p>Author: {{book_to_view.authors}}</p>
+        <ul>
+          {% for author in book.authors.all %}
+            <li>{{ author.first_name }} {{ author.last_name }}</li>
+          {% endfor %}
+        </ul>
+        <div class="text-start">
+          <p>
+            {% if book.reviews.all %}
+            {% for review in book.reviews.all %}
+              <p>{{ review.user.first_name }} {{ review.user.last_name }} says: {{ review.review_text }}</p>
+              <p>Rating: {{ review.rating }}</p>
+              <p>Posted on: {{ review.created_at }}</p>
+            {% endfor %}
+          {% else %}
+            <p>No reviews yet.</p>
+          {% endif %}
+          </p>
+        </div>
+      </div>
+
+        <div class="col-12 col-lg-6 col-md-12 justify-content-center">
+          <h3> Add a review</h3>
+          <form action="/addreview" method="post">
+            <div class="mb-3 row">
+              <label for="review" class="form-label col-sm-2">Review: </label>
+              <div class="col-sm-9">
+                <textarea name="review" id="review" class="form-control" placeholder="Your review" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="rating" class="form-label col-sm-2">Rating: </label>
+              <div class="col-sm-9">
+                <input type="number" name="rating" id="rating" class="form-control" min="0" max="10"/> 
+              </div>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="btn btn-light shadow p-3 mb-5 bg-body-tertiary rounded"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </div>        
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

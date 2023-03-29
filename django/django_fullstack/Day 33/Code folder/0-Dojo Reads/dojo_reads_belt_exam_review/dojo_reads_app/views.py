@@ -117,6 +117,7 @@ def handle_add_book(request):
                 book=book,
                 user=user
             )
+            
             book_id = book.id  # set book_id if there are no errors
     return redirect(f'books/{book_id}' if book_id else '/books/add')
 
@@ -138,3 +139,14 @@ def view_book(request,book_id):
 # route to view users profile
 def view_user_profile(request):
   return render(request, "userrating.html") 
+
+# Add a review , handle adding a review 
+def add_review(request):
+    user_id = request.session['newUser']
+    user = User.objects.get(id=user_id)
+    book_id = None  # set default value for book_id
+    if request.method == 'POST':
+      
+      return redirect('/books/{book_id}')
+    else:
+      return redirect(f'/books/{book_id}')

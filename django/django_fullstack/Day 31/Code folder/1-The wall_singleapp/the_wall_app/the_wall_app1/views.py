@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 
+from datetime import datetime,timedelta
 from .models import *
+import time
+import pytz
 # Create your views here.
 import bcrypt
 #the main method to show the form page
@@ -98,8 +101,6 @@ def view_wall(request):
     return render(request, "thewall.html", context)
 
 
-
-
 # handle adding a comment
 def add_comment(request):
     if request.method == 'POST':
@@ -109,3 +110,12 @@ def add_comment(request):
         Comments.objects.create(comment=request.POST['comment'], user=logged_user, message=message)
     return redirect('/wall-and-comments')
   
+
+def delete_message(request,message_id):
+        user_id=request.session['newUser']
+        logged_user = Users.objects.get(id=user_id)
+        message = Messages.objects.get(id=message_id)
+        time_diff = datetime.datetime.now(pytz.utc) - message.created_at
+        if logged_user == message.user and time_diff > timedelta(minutes=1):
+            message.delete()
+        return redirect('/wall-and-comments')

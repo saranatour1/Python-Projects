@@ -44,6 +44,7 @@
           <div class="w-90 word-wrap mt-3">
             <div class="d-flex align-items-center justify-content-between "> {#messages#} 
               <p>
+                <a href="/delete/{{message.id}}"> delete message</a>
                 <strong>{{ message.user.first_name }} {{ message.user.last_name }}</strong> - <span class="small text-body-secondary">{{ message.created_at }}</span>
               </p>
               <p>
