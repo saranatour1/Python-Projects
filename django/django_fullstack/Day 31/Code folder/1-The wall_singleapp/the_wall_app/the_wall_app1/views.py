@@ -116,6 +116,6 @@ def delete_message(request,message_id):
         logged_user = Users.objects.get(id=user_id)
         message = Messages.objects.get(id=message_id)
         time_diff = datetime.datetime.now(pytz.utc) - message.created_at
-        if logged_user == message.user and time_diff > timedelta(minutes=1):
+        if logged_user == message.user and time_diff > timedelta(minutes=30):
             message.delete()
         return redirect('/wall-and-comments')
